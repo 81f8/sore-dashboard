@@ -10,7 +10,6 @@ import {
   EditOutlined,
 } from "@ant-design/icons";
 
-
 function App() {
   const [theproducts, setTheproducts] = useState([]);
   const [totalproducts, setTotalproducts] = useState(0);
@@ -19,14 +18,12 @@ function App() {
   const [isloading, setIsloading] = useState(false);
   const [limit, setLimit] = useState(10);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [addproduct, setAddProduct] = useState({
+    title: "",
+    description: "",
+    price: "",
+  });
 
-  
-  const handleAdd = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
   const fetchData = async () => {
     setIsloading(true);
     try {
@@ -43,6 +40,12 @@ function App() {
       console.log(err);
       setIsloading(false);
     }
+  };
+  const handleAdd = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
   };
 
   async function delprodet(id) {
@@ -92,7 +95,10 @@ function App() {
         >
           <EditOutlined />
           <Spacer width={29} />
-          <DeleteOutlined onClick={() => delprodet(record.id)} />
+          <DeleteOutlined
+            onClick={() => delprodet(record.id)}
+            style={{ color: "red" }}
+          />
         </div>
       ),
     },
@@ -152,6 +158,17 @@ function App() {
           onCancel={handleCancel}
           
         >
+          <div style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "100%",
+            gap: "1rem",
+          }} >
+            <Input placeholder="title" />
+            <Input placeholder="description" />
+            <Input placeholder="price" />
+          </div>
+        </Modal>
         <Spacer height={16} />
         <Table
           columns={columns}
