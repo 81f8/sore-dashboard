@@ -20,6 +20,13 @@ function App() {
   const [limit, setLimit] = useState(10);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  
+  const handleAdd = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   const fetchData = async () => {
     setIsloading(true);
     try {
@@ -110,7 +117,7 @@ function App() {
               }
             }}
             size="small"
-            placeholder="large size"
+            placeholder="Search"
             prefix={
               <SearchOutlined
                 style={{
@@ -137,11 +144,14 @@ function App() {
             + Add Prodect
           </Button>
         </div>
-        <Modal title="Basic Modal" open={isModalOpen}>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
+        <Modal
+          title="Add New Product"
+          okText="add"
+          open={isModalOpen}
+          onOk={handleAdd}
+          onCancel={handleCancel}
+          
+        >
         <Spacer height={16} />
         <Table
           columns={columns}
